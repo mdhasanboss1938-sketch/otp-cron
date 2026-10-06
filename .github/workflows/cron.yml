@@ -1,0 +1,17 @@
+name: OTP Bot Cron Trigger
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send /runcron to Telegram Bot
+        run: |
+          curl -X POST "https://api.telegram.org/bot8839266474:AAFupwnu7Eptwql-eTG2TMSLzyWO5C6eBvk/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d '{"chat_id": 7081635346, "text": "/runcron", "parse_mode": "HTML"}'
+          echo "✅ Cron triggered at $(date)"
